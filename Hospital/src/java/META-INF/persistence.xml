@@ -15,9 +15,9 @@
       <!-- senha do banco aqui -->
       <property name="javax.persistence.jdbc.password" value="postgres"/>      
       <!-- cria as tabelas automaticamente -->
-      <property name="eclipselink.ddl-generation" value="create-tables"/>
+      <!--property name="eclipselink.ddl-generation" value="create-tables"/-->
       <!-- comente a linha anterior e descomente a próxima quando fizer alterações nas classes entity -->
-      <!--property name="eclipselink.ddl-generation" value="create-or-extend-tables"/-->
+      <property name="eclipselink.ddl-generation" value="create-or-extend-tables"/>
       <property name="eclipselink.ddl-generation.output-mode" value="database"/>
     </properties>
   </persistence-unit>

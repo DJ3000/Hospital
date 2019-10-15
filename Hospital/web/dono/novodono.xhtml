@@ -18,8 +18,25 @@
                              required="true" 
                              requiredMessage="Nome obrigatório" 
                              maxlength="10" />
-                <p/>
                                 
+                <p:outputLabel value="CPF: "/>
+                <p:inputText value="#{novoDono.dono.cpf}" 
+                             required="true" 
+                             requiredMessage="CPF obrigatório" 
+                             maxlength="12" />
+                                
+                <p:outputLabel value="Endereço: "/>
+                <p:inputText value="#{novoDono.dono.endereço}" 
+                             required="true" 
+                             requiredMessage="Endereço obrigatório" 
+                             maxlength="50" />
+                                
+                <p:outputLabel value="Telefone: "/>
+                <p:inputText value="#{novoDono.dono.telefone}" 
+                             required="true" 
+                             requiredMessage="Telefone obrigatório" 
+                             maxlength="15" />
+                                                
                 <p:commandButton value="Salvar" style=" width: 120px"
                                  action="#{novoDono.salvar()}"
                                  update="@form" />
