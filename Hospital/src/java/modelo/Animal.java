@@ -26,6 +26,12 @@ public class Animal implements Serializable {
     @Column(length = 30)
     private String raca;
     
+    @Column(length = 30)
+    private String especie;
+    
+    @Column(length = 30)
+    private Integer idade;
+    
     @ManyToOne
     @JoinColumn(name = "dono")
     private Dono dono;
@@ -34,16 +40,21 @@ public class Animal implements Serializable {
     public Animal() {
         this.nome = "";
         this.raca = "";
+        this.especie = "";
+        this.idade = null;
         this.dono = new Dono();
     }
     
-    public Animal(String nome, String raca, Dono dono) {
+    public Animal(String nome, String raca, Dono dono, String especie, Integer idade) {
         this.nome = nome;
         this.raca = raca;
         this.dono = dono;
+        this.especie = especie;
+        this.idade = idade;
     }
 
 //gets and seters
+
     public Integer getId() {
         return id;
     }
@@ -59,13 +70,29 @@ public class Animal implements Serializable {
     public void setNome(String nome) {
         this.nome = nome;
     }
-    
+
     public String getRaca() {
         return raca;
     }
 
     public void setRaca(String raca) {
         this.raca = raca;
+    }
+
+    public String getEspecie() {
+        return especie;
+    }
+
+    public void setEspecie(String especie) {
+        this.especie = especie;
+    }
+
+    public Integer getIdade() {
+        return idade;
+    }
+
+    public void setIdade(Integer idade) {
+        this.idade = idade;
     }
 
     public Dono getDono() {
@@ -77,10 +104,19 @@ public class Animal implements Serializable {
     }
 
     @Override
+    public String toString() {
+        return "Animal{" + "id=" + id + ", nome=" + nome + ", raca=" + raca + ", especie=" + especie + ", idade=" + idade + ", dono=" + dono + '}';
+    }
+
+    @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 17 * hash + Objects.hashCode(this.id);
-        hash = 17 * hash + Objects.hashCode(this.nome);
+        int hash = 5;
+        hash = 43 * hash + Objects.hashCode(this.id);
+        hash = 43 * hash + Objects.hashCode(this.nome);
+        hash = 43 * hash + Objects.hashCode(this.raca);
+        hash = 43 * hash + Objects.hashCode(this.especie);
+        hash = 43 * hash + Objects.hashCode(this.idade);
+        hash = 43 * hash + Objects.hashCode(this.dono);
         return hash;
     }
 
@@ -99,15 +135,24 @@ public class Animal implements Serializable {
         if (!Objects.equals(this.nome, other.nome)) {
             return false;
         }
+        if (!Objects.equals(this.raca, other.raca)) {
+            return false;
+        }
+        if (!Objects.equals(this.especie, other.especie)) {
+            return false;
+        }
         if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
+        if (!Objects.equals(this.idade, other.idade)) {
+            return false;
+        }
+        if (!Objects.equals(this.dono, other.dono)) {
             return false;
         }
         return true;
     }
-
-    @Override
-    public String toString() {
-        return "Animal{" + "id=" + id + ", nome=" + nome + ", raca=" + raca + '}';
-    }
-
+    
+    
+    
 }
