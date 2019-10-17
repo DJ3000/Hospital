@@ -15,7 +15,7 @@ public class DAO <T> implements Serializable{
     public DAO(Class<T> classe){
         this.classe = classe;
     }
-    
+
     public void inserir(T objeto){
         manager = JPAUtil.getEntityManager();
         EntityTransaction tx = manager.getTransaction();

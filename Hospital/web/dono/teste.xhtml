@@ -1,0 +1,142 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="body">
+            <p:menubar>
+                <p:submenu label="Opções">
+                    <p:menuitem value="Início" outcome="/menu"/>
+                    <p:separator />
+                    <p:menuitem value="Sair" outcome="/index" />
+                </p:submenu>
+                <p:submenu label="Administrador">
+                    <p:menuitem value="Gerenciar Administrador" outcome="/adm/adm"/>
+                </p:submenu>
+                <p:submenu label="Tutor">
+                    <p:menuitem value="Gerenciar Tutor" url="#" />
+                </p:submenu>
+                <p:submenu label="Animal">
+                    <p:menuitem value="Gerenciar Animal" outcome="/animal/novoanimal"/>
+                </p:submenu>
+            </p:menubar>
+            
+            <p:panel id="CadastroTutor" header="Cadastrar Tutor" style="width: 95%; margin-right: 30px; margin-top: 30px; margin-left: 30px">
+                <h:panelGrid columns="1">
+                    <h:form id="formPrincipal1">
+                        <p/>
+                        <h:panelGrid columns="12"> 
+                                <p:outputLabel value="Nome: "  style="margin-left: 10px"/>
+                                <p:inputText value="#{donoControle.dono.nome}" 
+                                                 required="true" 
+                                                 requiredMessage="Nome obrigatório"   style="width: 400px"/>
+                                    <p:outputLabel value="CPF: "  style="margin-left: 30px"/>
+                                    <p:inputText value="#{donoControle.dono.cpf}" 
+                                                 required="true" 
+                                                 maxlength="50" 
+                                                 requiredMessage="CPF obrigatório" />
+                                    <p:outputLabel value="Endereço: "  style="margin-left: 30px"/>
+                                    <p:inputText value="#{donoControle.dono.endereco}" 
+                                                required="true" 
+                                                maxlength="50"
+                                                requiredMessage="Endereço obrigatório" />
+                                    <p:outputLabel value="Telefone: "  style="margin-left: 30px"/>
+                                    <p:inputText value="#{donoControle.dono.telefone}" 
+                                                required="true" 
+                                                maxlength="50" 
+                                                requiredMessage="Telefone obrigatório" />
+                                    <p:commandButton value="Salvar" style=" width: 200px; margin-left: 50px"
+                                                     action="#{donoControle.salvar()}"
+                                                     update="@form"/>
+                        </h:panelGrid>
+                        <p:messages closable="true" showIcon="false"  />
+                    </h:form>   
+                </h:panelGrid>
+            </p:panel>
+
+            <p:panel id="ConsultaTutor" header="Consulta Tutores" style="width: 95%; margin-right: 30px; margin-top: 30px; margin-left: 30px">
+                <h:form id="formPrincipal" >
+                    <p:dataTable var="dono" value="#{donoControle.lista}"
+                                 tableStyle="width:auto;  min-width: 100%" > 
+                        <p:column headerText="Id">
+                            <h:outputText value="#{dono.id}" />
+                        </p:column>
+                        <p:column headerText="Nome">
+                            <h:outputText value="#{dono.nome}" />
+                        </p:column>
+                        <p:column headerText="CPF">
+                            <h:outputText value="#{dono.cpf}" />
+                        </p:column>           
+                        <p:column headerText="Endereço">
+                            <h:outputText value="#{dono.endereco}" />
+                        </p:column>  
+                        <p:column headerText="Telefone">
+                            <h:outputText value="#{dono.telefone}" />
+                        </p:column>  
+                        <p:column headerText="" style="text-align: center">
+                            <p:commandLink action="#{donoControle.alterar()}" 
+                                           styleClass="link"
+                                           update=":popupAltera" type="button" value="alterar" >
+                                <f:setPropertyActionListener value="#{dono}" target="#{DonoControle.dono}" />
+                            </p:commandLink>
+                        </p:column>
+                        <p:column headerText="" style="text-align: center">
+                            <p:commandLink styleClass="link" value="excluir"
+                                           action="#{donoControle.excluir(dono)}"                                             
+                                           update=":formPrincipal" >
+                                <p:confirm header="Excluir Tutor" 
+                                           message="Você tem certeza que deseja excluir este dono?"
+                                           icon="ui-icon-alert"/>
+                            </p:commandLink>
+                        </p:column>
+                    </p:dataTable>   
+                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                        <p:outputPanel style="width: 100%; text-align:center" layout="block"> 
+                            <p:commandButton value="sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                            <p:commandButton value="não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                        </p:outputPanel>
+                    </p:confirmDialog> 
+                </h:form>
+            </p:panel>
+                
+            <p:dialog closable="false" modal="true" header="Alteração"
+                      id="popupAltera"
+                      visible="#{donoControle.popupAltera}" >
+                <h:form id="formPopupAltera">
+                    <h:panelGrid columns="2">
+                        <p:outputLabel value="Nome "/>
+                        <p:inputText id="campoLogin" value="#{donoControle.dono.nome}" 
+                                     maxlength="50" > 
+                        </p:inputText>
+                        <p:outputLabel value="CPF: "/>
+                        <p:inputText value="#{donoControle.dono.cpf}" maxlength="30"
+                                     required="true" requiredMessage="CPF obrigatório"/>
+                        <p:outputLabel value="Endereço" />
+                        <p:inputText value="#{donoControle.dono.endereco}"
+                                    maxlength="50" 
+                                    required="true" requiredMessage="Endereço obrigatório"/>      
+                        <p:outputLabel value="Telefone" />
+                        <p:inputText value="#{donoControle.dono.telefone}"
+                                    maxlength="50" 
+                                    required="true" requiredMessage="Telefone obrigatório"/>      
+                    </h:panelGrid>
+                    <p/>
+                    <p:outputPanel style="width: 100%; text-align:center" >
+                        <p:commandButton value="Cancelar" action="#{donoControle.fecharPopupAltera()}" 
+                                         update=":popupAltera" immediate="true" />
+                        <p:commandButton value="Confirmar" action="#{donoControle.alterarTutor()}" 
+                                         update=":formPrincipal :popupAltera"/>                           
+                    </p:outputPanel>
+                    <p:outputPanel style="width: 100%; text-align:center" >
+                        <p:messages />
+                    </p:outputPanel>
+                </h:form>
+            </p:dialog>
+         
+        </ui:define>
+    </ui:composition>
+</html>
