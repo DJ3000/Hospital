@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html" 
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Hospital Veterinário</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    </h:head>
+    <h:body>
+        <ui:composition template="/template.xhtml">  
+        <ui:define name="body">
+        <p/>
+        <h:link outcome="adm/adm" value="Gerenciar Administradores" />
+        <p/>
+        <h:link outcome="dono/novodono" value="Gerenciar Donos" />
+        <p/>
+        <h:link outcome="animal/novoanimal" value="Novo Animal " />
+        <p/>
+        <h:link outcome="index" value="voltar" />
+        </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

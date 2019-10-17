@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Hospital Veterinário</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="/template.xhtml">  
+        <ui:define name="body">
+        <h:form id="formPrincipal">
+            <p/>
+            <h:panelGrid columns="2" > 
+                <p:outputLabel value="Nome: "/>
+                <p:inputText value="#{novoAnimal.animal.nome}" 
+                             required="true" 
+                             requiredMessage="Nome obrigatório" 
+                             maxlength="10" />
+                                
+                <p:outputLabel value="Raça: "/>
+                <p:inputText value="#{novoAnimal.animal.raca}" 
+                             required="true" 
+                             requiredMessage="Raça obrigatório" 
+                             maxlength="10" />
+                
+                 <p:outputLabel value="Idade: "/>
+                <p:inputText value="#{novoAnimal.animal.idade}" 
+                             required="true" 
+                             requiredMessage="Idade obrigatória" 
+                             maxlength="3" />
+                
+                <p:outputLabel value="Especie:  " />
+                <p:selectOneMenu id="comboEspecies"  
+                                 required="true" requiredMessage="Espécie obrigatória"  
+                                 value="#{novoAnimal.animal.especie}">
+                    <f:selectItem itemValue="#{null}" itemLabel="Escolha uma espécie" 
+                                  noSelectionOption="false"/>
+                    <f:selectItem  itemValue="Canino" itemLabel="Canino"/>
+                    <f:selectItem  itemValue="Felino" itemLabel="Felino"/>
+                    <f:selectItem  itemValue="Ovino" itemLabel="Ovino"/>
+                    <f:selectItem  itemValue="Bovino" itemLabel="Bovino"/>
+                    <f:selectItem  itemValue="Ave" itemLabel="Ave"/>
+                    <f:selectItem  itemValue="Pisceo" itemLabel="Piceo"/>
+                </p:selectOneMenu>
+                
+                <p:outputLabel value="Dono:  " />
+                <p:selectOneMenu id="comboDonos" converter="donoConverter" 
+                                 required="true" requiredMessage="Selecione um dono"  
+                                 value="#{novoAnimal.donoSelecionado}" >
+                    <f:selectItem itemValue="#{null}" itemLabel="Escolha um dono" 
+                                  noSelectionOption="false"/>
+                    <f:selectItems value="#{novoAnimal.donos}" 
+                                   var="dono"
+                                   itemValue="#{dono}"
+                                   itemLabel="#{dono.nome}"/>
+                </p:selectOneMenu>
+                
+                <p/>
+                                
+                <p:commandButton value="Salvar" style=" width: 120px"
+                                 action="#{novoAnimal.salvar()}"
+                                 update="@form" />
+            </h:panelGrid>
+            <p:messages closable="true" showIcon="false"  />
+            <p/>
+            <h:link outcome="/menu" value="voltar" />
+        </h:form> 
+        </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
