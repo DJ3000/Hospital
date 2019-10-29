@@ -4,6 +4,9 @@
     <class>modelo.Administrador</class>
     <class>modelo.Dono</class>
     <class>modelo.Animal</class>
+    <class>modelo.Material</class>
+    <class>modelo.Medicamento</class>
+  </persistence-unit>
 
     
     <properties>

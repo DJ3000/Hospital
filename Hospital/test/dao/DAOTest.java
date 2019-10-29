@@ -48,13 +48,13 @@ public class DAOTest {
 //        dao.inserir(adm);
 //    }
     
-//    @Test
-//    public void testListar(){
-//        List<Administrador> lista = new DAO(Administrador.class).listarTodos();
-//        for(Administrador adm : lista){
-//            System.out.println(adm);
-//        }
-//    }
+    @Test
+    public void testListar(){
+        List<Administrador> lista = new DAO(Administrador.class).listarTodos();
+        for(Administrador adm : lista){
+            System.out.println(adm);
+        }
+    }
     
 //    @Test
 //    public void testListar(){
@@ -71,13 +71,13 @@ public class DAOTest {
 //        dao.inserir(dn);
 //    }
     
-    @Test
-    public void testListar(){
-        List<Animal> lista = new DAO(Animal.class).listarTodos();
-        for(Animal an: lista){
-            System.out.println(an);
-        }
-    }
+//    @Test
+//    public void testListar(){
+//        List<Animal> lista = new DAO(Animal.class).listarTodos();
+//        for(Animal an: lista){
+//            System.out.println(an);
+//        }
+//    }
     
 //    @Test
 //    public void testinserir() {
