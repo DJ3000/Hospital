@@ -11,6 +11,12 @@
         </file>
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/cc09059259980/Documents/NetBeansProjects/Hospital/Hospital/test/dao/DAOTest.java</file>
+            <file>file:/C:/Users/cc09059259980/Documents/NetBeansProjects/Hospital/Hospital/web/dono/gerenciadono.xhtml</file>
+            <file>file:/C:/Users/cc09059259980/Documents/NetBeansProjects/Hospital/Hospital/web/estoque/material.xhtml</file>
+            <file>file:/C:/Users/cc09059259980/Documents/NetBeansProjects/Hospital/Hospital/src/java/controle/DonoControle.java</file>
+            <file>file:/C:/Users/cc09059259980/Documents/NetBeansProjects/Hospital/Hospital/src/java/controle/MaterialControle.java</file>
+        </group>
     </open-files>
 </project-private>

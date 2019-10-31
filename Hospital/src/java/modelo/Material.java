@@ -21,6 +21,8 @@ public class Material implements Serializable {
     private Double custo;
     @Column (length = 10)
     private Integer qtd;
+    @Column (length = 30)
+    private String nome;
 
     public Material() {
         id = 0;
@@ -28,17 +30,20 @@ public class Material implements Serializable {
         marca = "";
         custo = 0.0;
         qtd = 0;
+        nome = "";
     }
-    
-    public Material(Integer id, String tipo, String marca, Double custo, Integer qtd) {
+
+    public Material(Integer id, String tipo, String marca, Double custo, Integer qtd, String nome) {
         this.id = id;
         this.tipo = tipo;
         this.marca = marca;
         this.custo = custo;
         this.qtd = qtd;
+        this.nome = nome;
     }
     
-//gets and seters
+    //getters e setters
+
     public Integer getId() {
         return id;
     }
@@ -78,16 +83,24 @@ public class Material implements Serializable {
     public void setQtd(Integer qtd) {
         this.qtd = qtd;
     }
-    
+
+    public String getNome() {
+        return nome;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 41 * hash + Objects.hashCode(this.getId());
-        hash = 41 * hash + Objects.hashCode(this.getTipo());
-        hash = 41 * hash + Objects.hashCode(this.getMarca());
-        hash = 41 * hash + Objects.hashCode(this.getCusto());
-        hash = 41 * hash + Objects.hashCode(this.getQtd());
+        int hash = 5;
+        hash = 37 * hash + Objects.hashCode(this.id);
+        hash = 37 * hash + Objects.hashCode(this.tipo);
+        hash = 37 * hash + Objects.hashCode(this.marca);
+        hash = 37 * hash + Objects.hashCode(this.custo);
+        hash = 37 * hash + Objects.hashCode(this.qtd);
+        hash = 37 * hash + Objects.hashCode(this.nome);
         return hash;
     }
 
@@ -109,6 +122,9 @@ public class Material implements Serializable {
         if (!Objects.equals(this.marca, other.marca)) {
             return false;
         }
+        if (!Objects.equals(this.nome, other.nome)) {
+            return false;
+        }
         if (!Objects.equals(this.id, other.id)) {
             return false;
         }
@@ -123,6 +139,6 @@ public class Material implements Serializable {
 
     @Override
     public String toString() {
-        return "Material{" + "id=" + getId() + ", tipo=" + getTipo() + ", marca=" + getMarca() + ", custo=" + getCusto() + ", qtd=" + getQtd() + '}';
+        return "Material{" + "id=" + id + ", tipo=" + tipo + ", marca=" + marca + ", custo=" + custo + ", qtd=" + qtd + ", nome=" + nome + '}';
     }
 }

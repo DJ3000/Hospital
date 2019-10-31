@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">  
+        <ui:define name="body">
+            <h:form >
+                <h:panelGrid style=" width:100%; text-align: right"  >                 
+                    <p:commandLink styleClass="link" value="menu" action="/menu"  />                                  
+                </h:panelGrid>
+            </h:form>
+            <p/>
+            <h:form>
+                <p:commandLink styleClass="link" value="Novo" 
+                               action="#{MaterialControle.abrePopupNovo() }" 
+                               update=":popupNovo" />
+            </h:form> 
+            <p/>
+            <h:form id="formPrincipal" >
+                <p:dataTable var="mat" value="#{MaterialControle.lista}"
+                             tableStyle="width:auto;  min-width: 100%" > 
+                    <p:column headerText="Id">
+                        <h:outputText value="#{mat.id}" />
+                    </p:column>
+                    <p:column headerText="Tipo">
+                        <h:outputText value="#{mat.tipo}" />
+                    </p:column>
+                    <p:column headerText="Nome">
+                        <h:outputText value="#{mat.nome}" />
+                    </p:column>
+                    <p:column headerText="Marca">
+                        <h:outputText value="#{mat.marca}" />
+                    </p:column>
+                    <p:column headerText="Custo">
+                        <h:outputText value="#{mat.custo}" />
+                    </p:column>
+                    <p:column headerText="Qtd">
+                        <h:outputText value="#{mat.qtd}" />
+                    </p:column>
+                    
+                    <p:column headerText="" style="text-align: center">
+                        <p:commandLink action="#{aterialControle.alterar()}" 
+                                       styleClass="link"
+                                       update=":popupAltera" type="button" value="alterar" >
+                            <f:setPropertyActionListener value="#{mat}" target="#{MaterialControle.mat}" />
+                        </p:commandLink>
+                    </p:column>
+                    <p:column headerText="" style="text-align: center">
+                        <p:commandLink styleClass="link" value="excluir"
+                                       action="#{MaterialControle.excluir(mat)}"                                             
+                                       update=":formPrincipal" >
+                            <p:confirm header="Excluir material" 
+                                       message="Você tem certeza que deseja excluir este material?"
+                                       icon="ui-icon-alert"/>
+                        </p:commandLink>
+                    </p:column>
+                </p:dataTable>   
+                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                    <p:outputPanel style="width: 100%; text-align:center" layout="block"> 
+                        <p:commandButton value="sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                        <p:commandButton value="não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                    </p:outputPanel>
+                </p:confirmDialog> 
+            </h:form>
+
+
+            <p:dialog closable="false" modal="true" header="Novo material" 
+                      id="popupNovo"  visible="#{MaterialControle.popupNovo}" >
+                <h:form id="formPopupNovo" >
+                    <h:panelGrid columns="2">
+                    
+                    <p:outputLabel value="Tipo:  " />
+                    <p:selectOneMenu id="comboTipo"  
+                                     required="true" requiredMessage="Tipo obrigatória"  
+                                     value="#{MaterialControle.mat.tipo}">
+                        <f:selectItem itemValue="#{null}" itemLabel="Escolha um tipo" 
+                                      noSelectionOption="false"/>
+                        <f:selectItem  itemValue="Material" itemLabel="Material"/>
+                        <f:selectItem  itemValue="Medicamento" itemLabel="Medicamento"/>
+                        
+                    </p:selectOneMenu>
+                    <p:outputLabel value="Nome: "/>
+                    <p:inputText value="#{MaterialControle.mat.nome}" 
+                                 required="true" 
+                                 requiredMessage="Nome obrigatório" 
+                                 maxlength="30" />
+                    <p:inputText value="#{MaterialControle.mat.marca}" 
+                                 required="true" 
+                                 requiredMessage="Marca obrigatória" 
+                                 maxlength="30" />
+                    <p:inputText value="#{MaterialControle.mat.custo}" 
+                                 required="true" 
+                                 requiredMessage="Custo obrigatório" 
+                                 maxlength="10" />
+                    <p:inputText value="#{MaterialControle.mat.qtd}" 
+                                 required="true" 
+                                 requiredMessage="Qtd obrigatória" 
+                                 maxlength="15" />
+                                      
+                    </h:panelGrid>
+                    <p/>
+                    <p:outputPanel style="width: 100%; text-align:center" >
+                        <p:commandButton value="Cancelar" action="#{MaterialControle.fecharPopupNovo}" 
+                                         update=":formPrincipal, :popupNovo" immediate="true" />
+                        <p:commandButton value="Confirmar" action="#{MaterialControle.inserir()}" 
+                                         update=":popupNovo, :formPrincipal"/>                           
+                    </p:outputPanel>
+                    <p:outputPanel style="width: 100%; text-align:center" >
+                        <p:messages showIcon="false" />
+                    </p:outputPanel>  
+                </h:form>
+            </p:dialog>
+
+
+            <p:dialog closable="false" modal="true" header="Alteração"
+                      id="popupAltera"
+                      visible="#{MaterialControle.popupAltera}" >
+                <h:form id="formPopupAltera">
+                    <h:panelGrid columns="2">
+                       <p:outputLabel value="Tipo:  " />
+                    <p:selectOneMenu id="comboTipo"  
+                                     required="true" requiredMessage="Tipo obrigatória"  
+                                     value="#{MaterialControle.mat.tipo}">
+                        <f:selectItem itemValue="#{null}" itemLabel="Escolha um tipo" 
+                                      noSelectionOption="false"/>
+                        <f:selectItem  itemValue="Material" itemLabel="Material"/>
+                        <f:selectItem  itemValue="Medicamento" itemLabel="Medicamento"/>
+                        
+                    </p:selectOneMenu>
+                    <p:outputLabel value="Nome: "/>
+                    <p:inputText value="#{MaterialControle.mat.nome}" 
+                                 required="true" 
+                                 requiredMessage="Nome obrigatório" 
+                                 maxlength="30" />
+                    <p:inputText value="#{MaterialControle.mat.marca}" 
+                                 required="true" 
+                                 requiredMessage="Marca obrigatória" 
+                                 maxlength="30" />
+                    <p:inputText value="#{MaterialControle.mat.custo}" 
+                                 required="true" 
+                                 requiredMessage="Custo obrigatório" 
+                                 maxlength="10" />
+                    <p:inputText value="#{MaterialControle.mat.qtd}" 
+                                 required="true" 
+                                 requiredMessage="Qtd obrigatória" 
+                                 maxlength="15" />                   
+                    </h:panelGrid>
+                    <p/>
+                    <p:outputPanel style="width: 100%; text-align:center" >
+                        <p:commandButton value="Cancelar" action="#{MaterialControle.fecharPopupAltera()}" 
+                                         update=":popupAltera" immediate="true" />
+                        <p:commandButton value="Confirmar" action="#{MaterialControle.alterarDono()}" 
+                                         update=":formPrincipal :popupAltera"/>                           
+                    </p:outputPanel>
+                    <p:outputPanel style="width: 100%; text-align:center" >
+                        <p:messages />
+                    </p:outputPanel>
+                </h:form>
+            </p:dialog>
+
+        </ui:define>
+    </ui:composition>
+</html>

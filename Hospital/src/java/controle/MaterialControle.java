@@ -11,7 +11,7 @@ import javax.faces.bean.ViewScoped;
 import javax.faces.context.FacesContext;
 import modelo.Material;
 
-@ManagedBean
+@ManagedBean (name = "MaterialControle")
 @ViewScoped
 public class MaterialControle implements Serializable {
 
@@ -58,7 +58,7 @@ public class MaterialControle implements Serializable {
         converter();
         boolean jaExiste = true;
         try {
-            Material temp = new DAO(Material.class).buscaPorNome(mat.getTipo());
+            Material temp = (Material) new DAO(Material.class).buscarPorNome(mat.getTipo());
         } catch (ExcecaoObjetoNaoEncontrado e) {
             jaExiste = false;
         }
@@ -72,9 +72,7 @@ public class MaterialControle implements Serializable {
             fc.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
                     "Já existe este LOGIN", null));
         }
-
     }
-
     
     public void alterarMaterial() {
         dao.alterar(mat);

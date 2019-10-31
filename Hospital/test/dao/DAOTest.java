@@ -9,6 +9,7 @@ import java.util.List;
 import modelo.Administrador;
 import modelo.Animal;
 import modelo.Dono;
+import modelo.Material;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -48,13 +49,13 @@ public class DAOTest {
 //        dao.inserir(adm);
 //    }
     
-    @Test
-    public void testListar(){
-        List<Administrador> lista = new DAO(Administrador.class).listarTodos();
-        for(Administrador adm : lista){
-            System.out.println(adm);
-        }
-    }
+//    @Test
+//    public void testListar(){
+//        List<Administrador> lista = new DAO(Administrador.class).listarTodos();
+//        for(Administrador adm : lista){
+//            System.out.println(adm);
+//        }
+//    }
     
 //    @Test
 //    public void testListar(){
@@ -86,4 +87,11 @@ public class DAOTest {
 //        DAO<Animal> dao = new DAO (Animal.class);
 //        dao.inserir(an);
 //    }
+    
+    @Test
+    public void testinserir() {
+        Material mat = new Material();
+        DAO<Material> dao = new DAO (Material.class);
+        dao.inserir(mat);
+    }
 }
