@@ -94,4 +94,12 @@ public class DAOTest {
         DAO<Material> dao = new DAO (Material.class);
         dao.inserir(mat);
     }
+    
+//    @Test
+//    public void testListar(){
+//        List<Dono> lista = new DAO(Dono.class).listarTodos();
+//        for(Dono dn : lista){
+//            System.out.println(dn);
+//        }
+//    }
 }

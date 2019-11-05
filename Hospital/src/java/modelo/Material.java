@@ -91,7 +91,12 @@ public class Material implements Serializable {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
+    
+//função que calcula o preço total do produto
+    public Double precoTotal(Double custo, Integer qtd){
+        return qtd*custo;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 5;

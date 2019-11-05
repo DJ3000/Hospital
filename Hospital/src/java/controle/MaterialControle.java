@@ -14,7 +14,6 @@ import modelo.Material;
 @ManagedBean (name = "MaterialControle")
 @ViewScoped
 public class MaterialControle implements Serializable {
-
     private Material mat;
     private DAO<Material> dao;
     private List<Material> lista;
@@ -29,25 +28,26 @@ public class MaterialControle implements Serializable {
         popupAltera = false;  // fica oculto
     }
 
+//abertura dos popups de novo e de alteracoes
     public void abrePopupNovo() {
-        mat = new Material();
-        this.popupNovo = true;
+        setMat(new Material());
+        this.setPopupNovo(true);
     }
 
     public void fecharPopupNovo() {
-        this.popupNovo = false;
+        this.setPopupNovo(false);
     }
     
     public void abrePopupAltera(){        
-        this.popupAltera = true;
+        this.setPopupAltera(true);
     }
     
     public void fecharPopupAltera(){
-        this.popupAltera = false;
+        this.setPopupAltera(false);
     }
 
     public void converter() {
-        mat.setTipo(mat.getTipo().toUpperCase());
+        getMat().setTipo(getMat().getTipo().toUpperCase());
     }
     
     public void alterar(){
@@ -58,14 +58,14 @@ public class MaterialControle implements Serializable {
         converter();
         boolean jaExiste = true;
         try {
-            Material temp = (Material) new DAO(Material.class).buscarPorNome(mat.getTipo());
+            Material temp = (Material) new DAO(Material.class).buscarPorNome(getMat().getTipo());
         } catch (ExcecaoObjetoNaoEncontrado e) {
             jaExiste = false;
         }
         if (!jaExiste) {
-            dao.inserir(mat);
-            lista = dao.listarTodos();
-            mat = new Material();  // apenas para limpar os campos
+            getDao().inserir(getMat());
+            setLista(getDao().listarTodos());
+            setMat(new Material());  // apenas para limpar os campos
             fecharPopupNovo();
         } else {
             FacesContext fc = FacesContext.getCurrentInstance();
@@ -75,22 +75,23 @@ public class MaterialControle implements Serializable {
     }
     
     public void alterarMaterial() {
-        dao.alterar(mat);
-        lista = dao.listarTodos(); // atualiza a lista
-        mat = new Material(); 
+        getDao().alterar(getMat());
+        setLista(getDao().listarTodos()); // atualiza a lista
+        setMat(new Material()); 
         fecharPopupAltera();
     }
     
     public void excluir(Material mat){
-        dao.excluir(mat.getId());
-        lista.remove(mat);
+        getDao().excluir(mat.getId());
+        getLista().remove(mat);
     }
        
-    public Material getAdm() {
+//getters and setters
+    public Material getMat() {
         return mat;
     }
 
-    public void setAdm(Material mat) {
+    public void setMat(Material mat) {
         this.mat = mat;
     }
 
@@ -125,6 +126,7 @@ public class MaterialControle implements Serializable {
     public void setPopupAltera(boolean popupAltera) {
         this.popupAltera = popupAltera;
     }
+    
 
 }
 
