@@ -1,0 +1,31 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Hospital Veterinário</title>
+    </h:head>
+    <h:body>
+        <h:form id="formPrincipal">
+            <p/>
+            <h:panelGrid columns="2" > 
+                <p:outputLabel value="Nome: " />
+                <p:inputText value="#{novoCliente.cliente.nome}" 
+                             required="true" 
+                             maxlength="30" 
+                             requiredMessage="Nome obrigatório" />
+                <p/>
+                <p:commandButton value="Salvar" style=" width: 120px"
+                                 action="#{novoCliente.salvar()}"
+                                 update="@form" />
+            </h:panelGrid>
+            <p:messages closable="true" showIcon="false"  />
+            <p/>
+            <h:link outcome="/menu" value="voltar" />
+        </h:form>    
+
+
+
+    </h:body>
+</html>
