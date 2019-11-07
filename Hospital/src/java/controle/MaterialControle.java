@@ -1,7 +1,7 @@
 package controle;
 
 import dao.DAO;
-import dao.ExcecaoObjetoNaoEncontrado;
+import dao.ExcecaoObjetoMenorEstoque;
 import dao.ExcecaoObjetoNaoEncontrado;
 import java.io.Serializable;
 import java.util.List;
@@ -91,10 +91,39 @@ public class MaterialControle implements Serializable {
         getDao().alterar(mat);
     }
     
-    public void removerUm(Material mat){
-        mat.removerUm();
+    public void removerUm(Material mat){   
+        if (mat.getQtd() != 0)
+        {
+            mat.removerUm();
+            getDao().alterar(mat);
+        }
+        else
+        {
+            FacesContext fc = FacesContext.getCurrentInstance();
+            fc.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                    "Já existe este LOGIN", null));
+        }       
+    }
+    
+    public void adicionar(Material mat){
+        mat.adicionar();
         getDao().alterar(mat);
     }
+    
+    public void remover(Material mat){   
+        if (mat.getQtd() != 0)
+        {
+            mat.remover();
+            getDao().alterar(mat);
+        }
+        else
+        {
+            FacesContext fc = FacesContext.getCurrentInstance();
+            fc.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
+                    "Já existe este LOGIN", null));
+        }       
+    }
+    
        
 //getters and setters
     public Material getMat() {
@@ -136,9 +165,5 @@ public class MaterialControle implements Serializable {
     public void setPopupAltera(boolean popupAltera) {
         this.popupAltera = popupAltera;
     }
-    
-
-    
-
 }
 

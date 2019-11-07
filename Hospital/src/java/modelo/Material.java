@@ -101,19 +101,19 @@ public class Material implements Serializable {
     }
 //funções adiciona e remove um
     public void adicionarUm(){
-        setQtd(getQtd()+1);
-        
+        setQtd(getQtd()+ 1);
     }
     
     public void removerUm(){
-        if(qtd != 0){
-            setQtd(getQtd()-1);
-        }       
+            setQtd(getQtd()- 1);       
     }
     
     public void adicionar(Integer x){
-        setQtd(getQtd()+1);
-
+        setQtd(getQtd()+ x);
+    }
+    
+    public void remover(Integer x){
+        setQtd(getQtd()- x);   
     }
     
     @Override
