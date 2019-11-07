@@ -53,7 +53,7 @@ public class MaterialControle implements Serializable {
     public void alterar(){
         abrePopupAltera();
     }
-
+    
     public void inserir() {
         converter();
         boolean jaExiste = true;
@@ -84,6 +84,16 @@ public class MaterialControle implements Serializable {
     public void excluir(Material mat){
         getDao().excluir(mat.getId());
         getLista().remove(mat);
+    }
+    
+    public void adicionarUm(Material mat){
+        mat.adicionarUm();
+        getDao().alterar(mat);
+    }
+    
+    public void removerUm(Material mat){
+        mat.removerUm();
+        getDao().alterar(mat);
     }
        
 //getters and setters
@@ -126,6 +136,8 @@ public class MaterialControle implements Serializable {
     public void setPopupAltera(boolean popupAltera) {
         this.popupAltera = popupAltera;
     }
+    
+
     
 
 }

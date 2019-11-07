@@ -2,6 +2,8 @@ package modelo;
 
 import java.io.Serializable;
 import java.util.Objects;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -23,6 +25,7 @@ public class Material implements Serializable {
     private Integer qtd;
     @Column (length = 30)
     private String nome;
+    
 
     public Material() {
         id = 0;
@@ -95,6 +98,22 @@ public class Material implements Serializable {
 //função que calcula o preço total do produto
     public Double precoTotal(Double custo, Integer qtd){
         return qtd*custo;
+    }
+//funções adiciona e remove um
+    public void adicionarUm(){
+        setQtd(getQtd()+1);
+        
+    }
+    
+    public void removerUm(){
+        if(qtd != 0){
+            setQtd(getQtd()-1);
+        }       
+    }
+    
+    public void adicionar(Integer x){
+        setQtd(getQtd()+1);
+
     }
     
     @Override

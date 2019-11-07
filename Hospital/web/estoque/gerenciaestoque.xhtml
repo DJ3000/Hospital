@@ -39,6 +39,10 @@
                     </p:column>
                     <p:column headerText="Qtd">
                         <h:outputText value="#{mat.qtd}" />
+                        <p:commandButton value="-" action="#{mat.removerUm()}" 
+                                         update=":formPrincipal"/>
+                        <p:commandButton value="+" action="#{MaterialControle.adicionarUm(mat)}" 
+                                         update=":formPrincipal"/>
                     </p:column>
                     <p:column headerText="Preço Total">
                         <h:outputText value="#{mat.precoTotal(mat.custo, mat.qtd)}" />
@@ -159,7 +163,12 @@
                     <p:inputText value="#{MaterialControle.mat.qtd}" 
                                  required="true" 
                                  requiredMessage="Qtd obrigatória" 
-                                 maxlength="15" />                   
+                                 maxlength="15" />       
+                    
+                    <p:selectOneRadio value="#{produtoControle.tipo}">
+                            <f:selectItem itemValue="0" itemLabel="Entrada"/>
+                            <f:selectItem itemValue="1" itemLabel="Saida"/>
+                        </p:selectOneRadio>
                     </h:panelGrid>
                     <p/>
                     <p:outputPanel style="width: 100%; text-align:center" >

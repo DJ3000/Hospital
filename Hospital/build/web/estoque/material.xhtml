@@ -38,7 +38,6 @@
                         <h:outputText value="#{mat.custo}"  />
                     </p:column>
                     <p:column headerText="Qtd">
-                        <p:spinner id="minMax" value="#{mat.qtd}" min="#{mat.qtd}" max="0" />
                         <h:outputText value="#{mat.qtd}" />
                     </p:column>
                     <p:column headerText="Preço Total">
@@ -166,7 +165,7 @@
                     <p:outputPanel style="width: 100%; text-align:center" >
                         <p:commandButton value="Cancelar" action="#{MaterialControle.fecharPopupAltera()}" 
                                          update=":popupAltera" immediate="true" />
-                        <p:commandButton value="Confirmar" action="#{MaterialControle.alterarDono()}" 
+                        <p:commandButton value="Confirmar" action="#{MaterialControle.alterarMaterial()}" 
                                          update=":formPrincipal :popupAltera"/>                           
                     </p:outputPanel>
                     <p:outputPanel style="width: 100%; text-align:center" >
