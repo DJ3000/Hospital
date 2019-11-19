@@ -105,7 +105,7 @@ public class Material implements Serializable {
     }
     
     public void removerUm(){
-            setQtd(getQtd()- 1);       
+            setQtd(getQtd()- 1);
     }
     
     public void adicionar(Integer x){

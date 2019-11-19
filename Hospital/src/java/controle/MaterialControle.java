@@ -105,25 +105,8 @@ public class MaterialControle implements Serializable {
         }       
     }
     
-    public void adicionar(Material mat){
-        mat.adicionar();
-        getDao().alterar(mat);
-    }
     
-    public void remover(Material mat){   
-        if (mat.getQtd() != 0)
-        {
-            mat.remover();
-            getDao().alterar(mat);
-        }
-        else
-        {
-            FacesContext fc = FacesContext.getCurrentInstance();
-            fc.addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR,
-                    "Já existe este LOGIN", null));
-        }       
-    }
-    
+      
        
 //getters and setters
     public Material getMat() {
@@ -166,4 +149,3 @@ public class MaterialControle implements Serializable {
         this.popupAltera = popupAltera;
     }
 }
-
